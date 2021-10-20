@@ -1,4 +1,3 @@
-
 package kata3;
 
 
@@ -15,9 +14,11 @@ import org.jfree.ui.ApplicationFrame;
 
 
 public class HistogramDisplay extends ApplicationFrame{
+    Histogram<String> histogram = new Histogram<String>();
     
-    public HistogramDisplay() {
+    public HistogramDisplay(Histogram<String> histogram) {
         super("HISTOGRAM");
+        this.histogram = histogram;
         setContentPane(createPanel());
         pack();
     }
@@ -40,12 +41,10 @@ public class HistogramDisplay extends ApplicationFrame{
     
     private DefaultCategoryDataset createDataset(){
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-        dataSet.addValue(3, "", "ulpgc.es");
-        dataSet.addValue(7, "", "gmail.com");
-        dataSet.addValue(5, "", "hotmail.es");
+        for (String key : histogram.keySet()) {
+            dataSet.addValue(histogram.get(key), "", key);
+        }
         return dataSet;
     }
     
 }
-
-
